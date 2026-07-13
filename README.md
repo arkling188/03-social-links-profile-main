@@ -1,106 +1,145 @@
-# Frontend Mentor - 社交链接个人资料
+﻿# Frontend Mentor - 社交链接个人资料解决方案
 
-![社交链接个人资料编码挑战的设计预览图](./preview.jpg)
+这是我完成的 [Frontend Mentor Social links profile 挑战](https://www.frontendmentor.io/challenges/social-links-profile-UG32l9m6dQ)。
 
-## 欢迎！
+## 设计稿
 
-感谢你查看这个前端编码挑战。
+### 桌面版
 
-[Frontend Mentor](https://www.frontendmentor.io) 的挑战会通过构建真实项目，帮助你提升编码能力。
+![社交链接个人资料桌面版设计稿](./design/destkop-design.jpg)
 
-**完成这个挑战，你需要具备 HTML 和 CSS 的基础理解。**
+### 在线访问
 
-## 挑战目标
+[查看在线页面](https://arkling188.github.io/03-social-links-profile-main/)
 
-你的任务是构建这个社交链接个人资料页面，并让它尽可能接近设计稿。
+## 概览
 
-你可以使用任何你喜欢的工具来完成这个挑战。如果你有想练习的工具或方法，也可以放心尝试。
+这个项目是一个个人资料社交链接卡片。页面中包含头像、姓名、地点、个人简介，以及 5 个社交平台链接。
 
-用户应该能够：
+这个练习重点是纵向 Flexbox 布局、按钮列表、链接语义、hover 状态、`width: 100%` 和父元素 padding 的关系。
 
-- 看到页面上所有交互元素的悬停状态和聚焦状态。
+## 使用的技术
 
-### 需要挑战支持？
+- HTML5
+- CSS
+- Flexbox
+- 本地图片资源
+- `a` 链接标签
+- `box-sizing: border-box`
+- hover 状态
 
-你可以加入我们的[社区](https://www.frontendmentor.io/community)，并在 **#help** 频道提问。
+## 我学到了什么
 
-## 在哪里找到所有内容
+### 社交按钮应该用 a 标签
 
-你的任务是根据 `/design` 文件夹里的设计图完成项目。里面包含移动端和桌面端两个版本的设计图。
+一开始可以用 `div` 做视觉按钮，但这些内容本质上是链接，所以更适合用：
 
-设计图是 JPG 静态图片。这意味着你需要根据自己的判断来设置一些样式，比如 `font-size`、`padding` 和 `margin`。
+```html
+<a class="option" href="#">GitHub</a>
+```
 
-如果你想使用 Figma 设计文件，练习专业工具并更快、更准确地完成项目，可以订阅 [PRO 会员](https://www.frontendmentor.io/pro)。
+这样语义更正确，也天然支持键盘聚焦。
 
-这个项目所需的所有资源都在 `/assets` 文件夹中。图片已经按照正确的屏幕尺寸导出，并且已经优化好了。
+### a 标签默认样式需要处理
 
-项目中还包含所需字体的可变字体文件和静态字体文件。你可以选择链接 Google Fonts，也可以使用本地字体文件来自行托管字体。注意：我们已经移除了这个项目不需要的字重对应的静态字体文件。
+`a` 标签默认可能有下划线，所以可以加：
 
-项目里还有一个 `style-guide.md` 文件，里面包含你需要的设计信息，比如颜色和字体。
+```css
+.option {
+  text-decoration: none;
+}
+```
 
-## 使用 AI 编码助手
+### hover 状态
 
-如果你在完成挑战时使用 AI 编码助手，比如 Claude、GitHub Copilot、Cursor 等，我们已经提供了两个辅助文件：
+按钮 hover 时背景变绿、文字变黑：
 
-- `AGENTS.md`：包含给 AI 助手的详细说明，告诉 AI 应该如何帮助你完成这个挑战。这个文件会根据挑战难度调整 AI 的帮助方式。对于新手挑战，AI 会提供更多引导；对于高级挑战，AI 会鼓励你更独立地完成。
-- `CLAUDE.md`：一个指向文件，用来告诉 Claude 类工具去读取 `AGENTS.md` 里的说明。
+```css
+.option:hover {
+  background-color: hsl(75, 94%, 57%);
+  color: black;
+  cursor: pointer;
+}
+```
 
-**如何使用它们：** 你不需要做任何额外操作。大多数 AI 编码工具会自动检测这些文件。AI 会读取它们，并调整自己的行为，成为更适合你的学习伙伴：引导你找到解决方案，而不是直接把答案写好。
+如果 HTML 里已经没有 `span`，就不要再写 `.option:hover span`，选择器要和实际结构对应。
 
-**注意：** 这些文件的目的是帮助你学习，而不是替你完成所有工作。AI 会被要求多提问、多给提示、多解释概念，而不是直接写完整答案。
+### width: 100% 是相对父元素
 
-## 构建你的项目
+按钮设置 `width: 100%` 时，它的宽度是相对于父元素 `.options` 的内容区域，不是相对于整个浏览器。
 
-你可以使用任何自己觉得舒服的工作流程。下面是一个建议流程，但你不一定必须完全照做：
+如果父元素在有 padding 的卡片里面，那么最终宽度会受到卡片内容区域影响。
 
-1. 在 [GitHub](https://github.com/) 上把项目初始化为公开仓库。创建仓库后，如果你需要帮助，会更容易把代码分享给社区。如果你不确定怎么做，可以阅读这个 [Try Git 资源](https://try.github.io/)。
-2. 配置你的仓库，把代码发布到一个网页地址。这样当你需要帮助时，可以同时分享项目网址和仓库地址。实现方式有很多种，下面也会推荐一些。
-3. 查看设计图，开始思考你要如何完成这个项目。这一步很重要，可以帮助你提前规划 CSS 类名，以及创建可复用的样式。
-4. 在添加任何样式之前，先用 HTML 搭建内容结构。先写 HTML 可以帮助你专注于创建清晰、合理的页面结构。
-5. 写项目的基础样式，包括通用内容样式，例如 `font-family` 和 `font-size`。
-6. 从页面顶部开始逐步添加样式，然后往下完成。只有当你对当前区域的效果满意后，再继续处理下一部分。
+### 重复写同一个属性，后面的覆盖前面的
 
-## 部署你的项目
+之前出现过：
 
-如上所述，有很多方式可以免费托管你的项目。我们推荐的托管平台有：
+```css
+.option {
+  width: 100%;
+  width: 248px;
+}
+```
 
-- [GitHub Pages](https://pages.github.com/)
-- [Vercel](https://vercel.com/)
-- [Netlify](https://www.netlify.com/)
+最终生效的是后面的 `width: 248px`，所以 `width: 100%` 看起来没有生效。
 
-你可以使用这些方案中的任何一种，也可以使用其他我们信任的托管服务。可以阅读这篇文章了解更多：[推荐和可信赖的托管平台](https://www.frontendmentor.io/guides/hosting-your-solution)。
+### 使用 gap 控制按钮间距
 
-## 创建自定义 `README.md`
+按钮列表是一个纵向 flex 容器：
 
-我们强烈建议你用自定义内容覆盖这个 `README.md`。起始代码里已经提供了一个模板文件：[`README-template.md`](./README-template.md)。
+```css
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+```
 
-这个模板会告诉你可以添加哪些内容。自定义 `README` 可以帮助你说明项目，并回顾自己学到了什么。你可以根据自己的需要自由修改模板。
+`gap` 比给每个按钮写 `margin-bottom` 更清楚，因为它表达的是“子元素之间的距离”。
 
-当你把自己的信息添加到模板后，可以删除当前文件，并把 `README-template.md` 重命名为 `README.md`。这样它就会显示为你仓库的 README 文件。
+## 遇到的问题
 
-## 提交你的解决方案
+### 按钮左右距离不一致
 
-在平台上提交你的解决方案，让社区里的其他人看到。你可以参考我们的[提交解决方案完整指南](https://www.frontendmentor.io/guides/how-to-submit-solutions)，了解如何提交以及一些实用建议。
+原因是 `.option` 里重复写了 `width`，后面的固定宽度覆盖了前面的 `100%`。
 
-记住，如果你希望别人给你反馈，提交时一定要提出问题。问题越具体、越详细，你越有可能获得有价值的反馈。
+解决方法是删掉固定宽度，只保留：
 
-## 分享你的解决方案
+```css
+.option {
+  width: 100%;
+}
+```
 
-你可以在多个地方分享你的解决方案：
+### 卡片上下空间过大
 
-1. 在我们的[社区](https://www.frontendmentor.io/community)的 **#finished-projects** 频道分享你的解决方案页面。
-2. 在 [X，也就是原 Twitter](https://x.com/frontendmentor) 上分享，并提及 **@frontendmentor**，同时附上仓库地址和在线预览地址。我们很乐意看看你做了什么，也可能帮助你扩散。
-3. 在 [LinkedIn](https://www.linkedin.com/company/frontend-mentor/) 上分享你的解决方案。
-4. 写一篇文章记录你的构建过程。写下你的工作流程、技术选择，并讲解你的代码，是巩固学习成果的好方法。可以发布文章的平台包括 [dev.to](https://dev.to/)、[Hashnode](https://hashnode.com/) 和 [CodeNewbie](https://community.codenewbie.org/)。
+一开始卡片有 `padding`，头像和最后一个按钮又额外设置了 margin，导致上下距离叠加。
 
-当你在平台上提交解决方案后，我们会提供一些模板，帮助你分享自己的作品。请根据需要编辑它们，并在需要反馈时提出具体问题。
+更好的思路是让 `.container` 的 `padding` 统一负责卡片内部上下左右留白。
 
-你的问题越具体，社区成员越有可能给出有帮助的反馈。
+### 少了 LinkedIn
 
-## 想给我们反馈？
+设计稿中有 5 个社交链接：`GitHub`、`Frontend Mentor`、`LinkedIn`、`Twitter`、`Instagram`。
 
-我们非常欢迎反馈！我们一直在改进挑战和平台。如果你有任何想法，可以发邮件到 hi[at]frontendmentor[dot]io。
+最终补齐了 `LinkedIn`。
 
-这个挑战是完全免费的。欢迎把它分享给任何想练习的人。
+## 继续改进
 
-**祝你构建愉快！**
+- 可以给 `.option:focus` 添加和 hover 一样的状态，提升键盘可访问性。
+- 可以给头像添加更完整的 `alt` 文本。
+- 可以把 CSS 拆到单独的样式文件。
+- 可以用 `max-width` 和 `width: calc(100% - 32px)` 优化移动端。
+
+## 作者
+
+- arkling
+
+## 核心总结
+
+```text
+链接用 a，不只是 div。
+width: 100% 是相对父元素。
+同一个属性后写的会覆盖先写的。
+按钮列表用 flex + gap 很自然。
+hover 和 HTML 结构要对应，不能选不存在的子元素。
+```
